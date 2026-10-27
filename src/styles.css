@@ -157,6 +157,98 @@
   --log-foreground: oklch(0.88 0.01 85);
 }
 
+/*
+ * Special (paid) themes, applied via [data-theme] on <html>.
+ * Light specials inherit :root; forest also carries .dark, which these
+ * later blocks override.
+ */
+[data-theme="sand"] {
+  --background: oklch(0.935 0.028 85);
+  --card: oklch(0.975 0.02 85);
+  --popover: oklch(0.985 0.015 85);
+  --secondary: oklch(0.9 0.03 85);
+  --secondary-foreground: oklch(0.3 0.03 60);
+  --muted: oklch(0.9 0.03 85);
+  --muted-foreground: oklch(0.48 0.03 60);
+  --accent: oklch(0.9 0.05 70);
+  --accent-foreground: oklch(0.4 0.11 55);
+  --border: oklch(0.86 0.03 80);
+  --input: oklch(0.84 0.035 75);
+  --ring: oklch(0.55 0.13 55);
+  --signal: oklch(0.55 0.13 55);
+  --signal-foreground: oklch(0.99 0.01 85);
+  --signal-soft: oklch(0.9 0.05 70);
+  --success-soft: oklch(0.92 0.04 130);
+  --warning-soft: oklch(0.92 0.05 85);
+  --log: oklch(0.94 0.02 85);
+  --sidebar: oklch(0.975 0.02 85);
+  --sidebar-accent: oklch(0.9 0.03 85);
+  --sidebar-border: oklch(0.86 0.03 80);
+  --sidebar-ring: oklch(0.55 0.13 55);
+}
+
+[data-theme="ocean"] {
+  --background: oklch(0.955 0.012 230);
+  --card: oklch(1 0 0);
+  --popover: oklch(1 0 0);
+  --secondary: oklch(0.93 0.02 230);
+  --secondary-foreground: oklch(0.25 0.03 240);
+  --muted: oklch(0.93 0.02 230);
+  --muted-foreground: oklch(0.46 0.03 240);
+  --accent: oklch(0.91 0.035 220);
+  --accent-foreground: oklch(0.38 0.08 220);
+  --border: oklch(0.88 0.02 230);
+  --input: oklch(0.86 0.025 230);
+  --ring: oklch(0.55 0.085 220);
+  --signal: oklch(0.55 0.085 220);
+  --signal-foreground: oklch(0.99 0.005 230);
+  --signal-soft: oklch(0.91 0.035 220);
+  --success-soft: oklch(0.92 0.04 165);
+  --warning-soft: oklch(0.93 0.04 90);
+  --log: oklch(0.955 0.01 230);
+  --sidebar: oklch(1 0 0);
+  --sidebar-accent: oklch(0.93 0.02 230);
+  --sidebar-border: oklch(0.88 0.02 230);
+  --sidebar-ring: oklch(0.55 0.085 220);
+}
+
+[data-theme="forest"] {
+  --background: oklch(0.17 0.015 160);
+  --foreground: oklch(0.96 0.01 145);
+  --card: oklch(0.21 0.02 160);
+  --card-foreground: oklch(0.96 0.01 145);
+  --popover: oklch(0.21 0.02 160);
+  --popover-foreground: oklch(0.96 0.01 145);
+  --primary: oklch(0.96 0.01 145);
+  --primary-foreground: oklch(0.17 0.015 160);
+  --secondary: oklch(0.26 0.02 160);
+  --secondary-foreground: oklch(0.96 0.01 145);
+  --muted: oklch(0.26 0.02 160);
+  --muted-foreground: oklch(0.7 0.02 150);
+  --accent: oklch(0.28 0.04 150);
+  --accent-foreground: oklch(0.9 0.05 145);
+  --destructive: oklch(0.68 0.19 22);
+  --destructive-foreground: oklch(0.96 0.01 145);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.72 0.14 145);
+  --signal: oklch(0.72 0.14 145);
+  --signal-foreground: oklch(0.17 0.015 160);
+  --signal-soft: oklch(0.28 0.045 150);
+  --success: oklch(0.72 0.14 145);
+  --success-foreground: oklch(0.17 0.015 160);
+  --success-soft: oklch(0.28 0.04 150);
+  --warning: oklch(0.78 0.14 90);
+  --warning-soft: oklch(0.3 0.05 90);
+  --log: oklch(0.19 0.015 160);
+  --log-foreground: oklch(0.88 0.01 150);
+  --sidebar: oklch(0.21 0.02 160);
+  --sidebar-foreground: oklch(0.96 0.01 145);
+  --sidebar-accent: oklch(0.26 0.02 160);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.72 0.14 145);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

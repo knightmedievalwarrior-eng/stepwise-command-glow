@@ -13,8 +13,10 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppHeader } from "@/components/app/AppHeader";
+import { UpgradeDialogHost } from "@/components/app/UpgradeDialogHost";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { BOOT_SCRIPT } from "@/lib/theme";
 
 function NotFoundComponent() {
   return (
@@ -105,6 +107,7 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="th">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
         <HeadContent />
       </head>
       <body>
@@ -128,6 +131,7 @@ function RootComponent() {
           </main>
         </div>
         <Toaster position="top-center" />
+        <UpgradeDialogHost />
       </TooltipProvider>
     </QueryClientProvider>
   );
