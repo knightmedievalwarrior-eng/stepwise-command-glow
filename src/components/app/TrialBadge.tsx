@@ -67,7 +67,7 @@ export function TrialBadge() {
   );
 }
 
-function UpgradeDialog({
+export function UpgradeDialog({
   open,
   onOpenChange,
   daysLeft,
