@@ -20,8 +20,8 @@ import { useT } from "@/lib/i18n";
 import { wipeAll } from "@/lib/session-store";
 
 import { LanguageToggle } from "./LanguageToggle";
-import { N8nSettingsDialog } from "./N8nSettingsDialog";
 import { RunIndicator } from "./RunIndicator";
+import { SupabaseSettingsDialog } from "./SupabaseSettingsDialog";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { TrialBadge } from "./TrialBadge";
 
@@ -46,23 +46,19 @@ export function AppHeader() {
           <ThemeSwitcher />
           <RunIndicator />
           <TrialBadge />
-          <N8nSettingsDialog />
+          <SupabaseSettingsDialog />
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-1 text-xs text-muted-foreground">
                 <ShieldCheck className="size-3.5 text-success" />
-                <span className="hidden lg:inline">
-                  {t("ข้อมูลอยู่ในเบราว์เซอร์นี้เท่านั้น", "Data stays in this browser only")}
-                </span>
-                <span className="hidden sm:inline lg:hidden">
-                  {t("ไม่เก็บบนเซิร์ฟเวอร์", "Not stored on a server")}
-                </span>
+                <span className="hidden lg:inline">{t("100% ในเครื่อง · เป็นส่วนตัว", "100% Local & Private")}</span>
+                <span className="hidden sm:inline lg:hidden">{t("100% Local", "100% Local")}</span>
               </span>
             </TooltipTrigger>
             <TooltipContent className="max-w-64 text-xs leading-relaxed">
               {t(
-                "ข้อมูลงานและข้อมูลลูกค้าไม่ถูกเก็บบนเซิร์ฟเวอร์ของแอปนี้ (เมื่อเชื่อม n8n จะส่งตรงไปที่ n8n ของคุณ) และถูกลบเมื่อปิดแท็บหรือเมื่องานเสร็จ ประวัติเก็บไว้เพียงสรุปที่ไม่ระบุตัวบุคคล",
-                "Tasks and customer data are never stored on this app's server (when n8n is connected, data goes straight to your n8n) and are deleted when the tab closes or the job finishes. History keeps only non-identifying summaries.",
+                "ไฟล์ Excel/CSV และข้อมูลลูกค้าทั้งหมดถูกเปิดและประมวลผลในเบราว์เซอร์ของคุณโดยตรง ไม่มีการอัปโหลดขึ้นเซิร์ฟเวอร์ของแอป (ถ้าเชื่อม Supabase ข้อมูลจะส่งตรงไปยังโปรเจกต์ของคุณ) และถูกลบเมื่อปิดแท็บหรืองานเสร็จ ประวัติเก็บเพียงสรุปที่ไม่ระบุตัวบุคคล",
+                "Excel/CSV files and customer data are opened and processed directly in your browser — nothing is uploaded to this app's server (with Supabase connected, data goes straight to your own project) and is deleted when the tab closes or the job finishes. History keeps only non-identifying summaries.",
               )}
             </TooltipContent>
           </Tooltip>
