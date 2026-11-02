@@ -25,7 +25,7 @@ function read(): SupabaseConfig {
   if (cache) return cache;
   if (typeof window === "undefined") return EMPTY;
   try {
-    const raw = JSON.parse(window.localStorage.getItem(SUPABASE_CONFIG_KEY) ?? "null") as Partial<SupabaseaseConfig> | null;
+    const raw = JSON.parse(window.localStorage.getItem(SUPABASE_CONFIG_KEY) ?? "null") as Partial<SupabaseConfig> | null;
     cache = {
       url: typeof raw?.url === "string" ? raw.url : "",
       apiKey: typeof raw?.apiKey === "string" ? raw.apiKey : "",
