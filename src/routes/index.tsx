@@ -103,7 +103,19 @@ function QuickActions() {
   };
   return (
     <section className="mt-14">
-      <SectionTitle eyebrow="Quick Actions" title={t("เริ่มงานด่วน", "Quick start")} />
+      <SectionTitle
+        eyebrow="Quick Actions"
+        title={t("เริ่มงานด่วน", "Quick start")}
+        action={
+          <Link
+            to="/data"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium transition-colors hover:border-signal/40 hover:text-signal"
+          >
+            <SheetIcon className="size-3.5" />
+            {t("เปิด Data Studio · Excel/CSV", "Open Data Studio · Excel/CSV")}
+          </Link>
+        }
+      />
       <div className="grid gap-3 sm:grid-cols-3">
         {TASK_LIST.map((def, i) => (
           <button
