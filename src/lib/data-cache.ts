@@ -4,6 +4,8 @@
  * browser only, so re-processing the same file never re-parses or re-sends
  * more than the minimal necessary payload. Cleared when the tab closes.
  */
+import { useSyncExternalStore } from "react";
+
 import { buildAiSample, fingerprint, type SheetTable } from "./spreadsheet";
 
 const CACHE_KEY = "gtr.dataset-cache.v1";
@@ -45,13 +47,13 @@ function persist() {
   } catch {
     // Quota exceeded — drop the oldest file and retry once.
     const shape = read();
-    if (shape.order.length > 1) {
-      const [oldest] = shape.order;
-      shape.order = shape.order.slice(1);
-      delete shape.entries[oldest];
-      cache = shape;
+    const oldest = shape.order[0];
+    if (shape.order.length > 1 && oldest !== undefined) {
+      const entries = { ...shape.entries };
+      delete entries[oldest];
+      cache = { order: shape.order.slice(1), entries };
       try {
-        window.sessionStorage.setItem(CACHE_KEY, JSON.stringify(shape));
+        window.sessionStorage.setItem(CACHE_KEY, JSON.stringify(cache));
       } catch {
         window.sessionStorage.removeItem(CACHE_KEY);
       }
@@ -84,9 +86,10 @@ export function cachedTables(fp: string): SheetTable[] | undefined {
 
 /** Cache a parsed dataset (browser only, size-capped). */
 export function storeDataset(tables: SheetTable[]) {
-  if (tables.length === 0) return;
-  const fp = fingerprint(tables[0].meta);
-  const entry: CacheEntry = { fp, tables, sample: buildAiSample(tables[0]), cachedAt: Date.now() };
+  const first = tables[0];
+  if (!first) return;
+  const fp = fingerprint(first.meta);
+  const entry: CacheEntry = { fp, tables, sample: buildAiSample(first), cachedAt: Date.now() };
   const shape = read();
   if (JSON.stringify(entry).length > MAX_DATASET_BYTES) return; // too big — skip caching, parse on demand
   const order = [fp, ...shape.order.filter((k) => k !== fp)].slice(0, MAX_FILES);

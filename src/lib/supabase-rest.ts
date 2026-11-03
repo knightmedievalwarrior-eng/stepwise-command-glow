@@ -22,7 +22,7 @@ function headers(cfg: SupabaseConfig): Record<string, string> {
     apikey: cfg.apiKey,
   };
   // Legacy anon JWTs use Bearer auth; opaque sb_publishable_ keys use apikey.
-  if (cfg.apiKey.startsWith("eyJ")) h.Authorization = `Bearer ${cfg.apiKey}`;
+  if (cfg.apiKey.startsWith("eyJ")) h["Authorization"] = `Bearer ${cfg.apiKey}`;
   return h;
 }
 
@@ -62,8 +62,7 @@ export async function uploadRows(
 ): Promise<UploadOutcome> {
   const chunks = chunkRows(rows);
   let inserted = 0;
-  for (let i = 0; i < chunks.length; i++) {
-    const chunk = chunks[i];
+  for (const [i, chunk] of chunks.entries()) {
     const bytes = JSON.stringify(chunk).length;
     if (bytes > CHUNK_BYTES) {
       // A single chunk should already respect the budget; guard anyway.

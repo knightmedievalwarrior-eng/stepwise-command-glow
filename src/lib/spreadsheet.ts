@@ -31,8 +31,9 @@ export function isAcceptedFile(file: { name: string }): boolean {
 export async function parseSpreadsheetFile(file: File): Promise<SheetTable[]> {
   const buf = await file.arrayBuffer();
   const wb = XLSX.read(buf, { type: "array", cellDates: true });
-  return wb.SheetNames.map((name) => {
+  return wb.SheetNames.flatMap((name): SheetTable[] => {
     const sheet = wb.Sheets[name];
+    if (!sheet) return [];
     const matrix = XLSX.utils.sheet_to_json<unknown[]>(sheet, { header: 1, blankrows: false, defval: "" });
     const headerRow = (matrix.shift() ?? []).map((c) => String(c ?? "").trim());
     const columns = headerRow.map((h, i) => (h ? h : `col${i + 1}`));
@@ -45,12 +46,14 @@ export async function parseSpreadsheetFile(file: File): Promise<SheetTable[]> {
         });
         return row;
       });
-    return {
-      name,
-      columns,
-      rows,
-      meta: { fileName: file.name, size: file.size, parsedAt: Date.now() },
-    };
+    return [
+      {
+        name,
+        columns,
+        rows,
+        meta: { fileName: file.name, size: file.size, parsedAt: Date.now() },
+      },
+    ];
   });
 }
 
