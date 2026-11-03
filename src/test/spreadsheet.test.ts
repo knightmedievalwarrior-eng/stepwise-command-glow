@@ -14,7 +14,8 @@ import {
   trimWhitespace,
 } from "@/lib/spreadsheet";
 import { __resetSupabaseConfigForTests, getSupabaseConfig, saveSupabaseConfig, validateSupabaseConfig } from "@/lib/supabase-config";
-import { chunkRowsAreSmall, restUrl } from "./helpers-supabase-rest";
+import { restUrl } from "@/lib/supabase-rest";
+import { CHUNK_BYTES, CHUNK_ROWS } from "@/lib/spreadsheet";
 
 const CSV = `name,email,amount
 Somchai Jaidee,somchai@example.com,1200
@@ -45,14 +46,6 @@ describe("spreadsheet parsing (client-side)", () => {
 });
 
 describe("cleaning", () => {
-  const tables = parseSpreadsheetFileSync(CSV);
-
-  function parseSpreadsheetFileSync(csv: string) {
-    let out: ReturnType<typeof parseSpreadsheetFile> extends Promise<infer T> ? T : never;
-    void csv;
-    return out as Awaited<ReturnType<typeof parseSpreadsheetFile>>;
-  }
-
   it("trims whitespace", async () => {
     const parsed = await parseSpreadsheetFile(makeFile("a.csv", CSV));
     const trimmed = trimWhitespace(parsed[0]);
@@ -92,19 +85,14 @@ describe("cleaning", () => {
 describe("chunking (token/credit efficiency)", () => {
   const big = Array.from({ length: 950 }, (_, i) => ({ id: String(i), note: "x".repeat(40) }));
 
-  it("splits rows into chunks of at most 200 rows", () => {
+  it("splits rows into chunks of at most the configured row limit", () => {
     const chunks = chunkRows(big);
-    expect(chunks.length).toBe(5);
-    for (const chunk of chunks) expect(chunk.length).toBeLessThanOrEqual(200);
-    expect(chunks.flat()).toHaveLength(950);
-  });
-
-  it("keeps every chunk well under the byte budget", () => {
-    const chunkList = chunkRows(big);
-    for (const chunk of chunkList) {
-      expect(JSON.stringify(chunk).length).toBeLessThan(512 * 1024);
+    expect(chunks.length).toBe(Math.ceil(950 / CHUNK_ROWS));
+    for (const chunk of chunks) {
+      expect(chunk.length).toBeLessThanOrEqual(CHUNK_ROWS);
+      expect(JSON.stringify(chunk).length).toBeLessThan(CHUNK_BYTES);
     }
-    expect(chunkList.every(chunkRowsAreSmall)).toBe(true);
+    expect(chunks.flat()).toHaveLength(950);
   });
 
   it("builds a minimal AI sample instead of the full dataset", async () => {
