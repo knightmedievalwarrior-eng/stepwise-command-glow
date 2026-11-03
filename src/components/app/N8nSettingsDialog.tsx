@@ -1,3 +1,8 @@
+/**
+ * n8n webhook settings — used only by the task-run pages (execute/review),
+ * where the bot pipeline is still executed by the user's own webhook.
+ * The header-level "Supabase & Database Configuration" modal is separate.
+ */
 import { Check, Copy, Loader2, PlugZap, ShieldCheck, Webhook } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
@@ -296,7 +301,7 @@ export function N8nSettingsDialog({ trigger }: { trigger?: ReactNode }) {
               </li>
               <li>
                 {t(
-                  'ตอบกลับสถานะตามแท็บ "การตอบกลับ" · ถ้าไม่ตอบรายขั้น ระบบถือว่าสำเร็จเมื่อ n8n รับคำสั่ง',
+                  'ตอบกลับสถานะตามแ็บ "การตอบกลับ" · ถ้าไม่ตอบรายขั้น ระบบถือว่าสำเร็จเมื่อ n8n รับคำสั่ง',
                   'Reply with status as shown in "Replies" · without step updates, the task counts as done once n8n accepts it',
                 )}
               </li>
