@@ -1,50 +1,40 @@
-# Stepwise Command Center
+# Stepwise Command Center (Task Runner SaaS)
 
-ช่วยสร้างและปรับปรุงแอปพลิเคชัน "Guided Task Runner & AI Command Center" สำหรับจัดการงานซ้ำๆ โดยรวมฟังก์ชันจากระบบเก่า (Lovable) และดีไซน์ใหม่ (v0) เข้าด้วยกัน โครงสร้างต้องเป็นแบบ Responsive รองรับมือถือและจอใหญ่ แสดงผลลื่นไหล
+## 📌 Project Overview
+Stepwise Command Center is a scalable, **100% Local-First & Privacy-First** SaaS application designed for office workers, accountants, and operations teams to automate repetitive tasks (such as Excel, Google Sheets, and document processing) directly inside their web browser.
 
-โครงสร้างหน้าจอหลักที่ต้องรวมกัน:
+---
 
-1. หน้าแรก Command Center: มีคำทักทาย ช่อง AI Chat Command ปุ่ม Quick Actions [ออกใบเสนอราคา, ลงข้อมูลลูกค้า, คีย์เอกสาร] ส่วนงานค้าง และประวัติบอทหลังบ้าน
+## 🛠️ Architecture & Tech Stack
+- **Frontend / UI:** Built via Lovable (v0-style responsive layout, supports mobile, tablet, and desktop).
+- **Backend & Auth:** **Supabase** (handles secure user authentication, RLS security policies, and user profiles/metadata).
+- **Processing Engine:** **Client-Side Processing (Local-First)** using browser memory and parsing libraries (e.g., SheetJS/xlsx) to ensure absolute data privacy and zero server-side file storage.
+- **Version Control:** GitHub (Single Source of Truth for seamless multi-account collaboration).
 
-2. หน้า Real-Time Execution Display: แสดง Progress Bar และกล่อง Log สถานะการทำงานทีละขั้น (เชื่อมต่อ n8n ในอนาคต)
+---
 
-3. หน้า Wizard Task Runner: ขั้นตอนการทำงานทีละสเต็ป (1, 2, 3...) พร้อมฟอร์มกรอกข้อมูลและปุ่มควบคุม ย้อนกลับ/ถัดไป พร้อมระบบบันทึกอัตโนมัติ
+## ✨ Key Features
+1. **Command Center Hub:** 
+   - Bilingual support (**TH / EN**) and Light/Dark Theme toggle[cite: 3].
+   - AI Chat Command interface with Privacy-First execution badges (*"100% ในเครื่อง - เป็นส่วนตัว"*)[cite: 3].
+   - Quick Actions menu for high-pain workflows (e.g., Quotation Generation, Customer Data Entry, Document Sorting)[cite: 3].
+2. **Local-First Excel/CSV Studio:**
+   - Drag-and-drop file upload zone.
+   - Client-side data parsing and cleaning without sending sensitive corporate files to external cloud storage.
+3. **Secure Hybrid Monetization:**
+   - Built-in trial period management (e.g., 15-day trial countdown) and flexible usage/subscription tier checks.
+   - Row Level Security (RLS) enabled on Supabase to isolate user data completely.
 
-4. หน้าสรุปและยืนยัน: ตรวจทานข้อมูลก่อนส่งจริงและหน้าจอ Success
+---
 
-ช่อง AI Chat Command ในหน้าแรก ต้องการให้ทำงานแบบไหนตอนนี้?
+## 🔒 Privacy & Security Guarantee
+- **No-Storage / Privacy-First Policy:** All tabular data and processing occur locally within the user's browser[cite: 3]. Data is cleared immediately upon session end, protecting corporate privacy and ensuring compliance.
+- **Cost Optimization:** Minimized server API calls and client-side caching architecture designed to scale smoothly from hundreds to millions of users without runaway infrastructure costs.
 
-1.Al จริง (Lovable Al) ตอบคำถามและแปลงคำสั่งเป็นงานจริงด้วย AI (ต้องเปิด Lovable Cloud ใช้ Al Gateway)
+---
 
-2.จําลองการแยกค่าสั่ง จับคำสั่งที่พิมพ์ (เช่น "ออกใบเสนอราคา") แล้วเปิดหน้าที่เกี่ยวข้อง ท่างานทันทีไม่ต้องเชื่อมต่อ Al
+## 🚀 Live App & Development
+- **Live Preview:** [Stepwise Command Center Preview](https://stepwise-command-center.lovable.app)[cite: 3]
+- **Lovable Workspace:** [Edit in Lovable](https://lovable.dev/projects/bd37507d-aa58-4a7d-bc17-866ac358add3)[cite: 3]
 
-"คำตอบคือเลือก ผสมทั้งสอง พิมพ์ได้ทั้งค่าถาม (ตอบด้วย AI) และค่าสั่ง (กระโดดไปหน้างาน)"
-
-ข้อมูล (งานค้าง, ประวัติการทำงาน, ข้อมูลลูกค้า) ต้องการเก็บแบบไหน?
-
-เลือกแบบ "ไม่เก็บข้อมูลใดๆ บน Server ทั้งสิ้น (No-Storage / Privacy-First)" ให้ระบบใช้การประมวลผลและจำลองข้อมูลชั่วคราวบนเบราว์เซอร์ของผู้ใช้ (Client-side / Local state) เท่านั้น เมื่อผู้ใช้ปิดหน้าเว็บหรือสิ้นสุดภารกิจ ให้ข้อมูลทั้งหมดถูกทำลายทิ้งทันที เพื่อความปลอดภัยและความเป็นส่วนตัวสูงสุดของลูกค้า แต่ยังมีบันทึกประวัติการใช้งานเพื่อให้ผู้ใช้ยังจำได้ว่าเคยใช้ระบบนี้ทำไรไปแล้วบ้าง
-
-โทนสีดีไซน์ที่ เหมาะสมที่สุด คือ "สว่าง มินิมอล (Light Minimalist)"
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://stepwise-command-center.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/bd37507d-aa58-4a7d-bc17-866ac358add3).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+---
