@@ -360,7 +360,7 @@ function TablePreview(props: {
           <span>{t(`${stats.columns} คอลัมน์`, `${stats.columns} columns`)}</span>
           {stats.emptyCells > 0 && <span>{t(`ช่องว่าง ${stats.emptyCells}`, `${stats.emptyCells} empty cells`)}</span>}
           {stats.duplicates > 0 && (
-            <span className="flex items-center gap-1 text-warn">
+            <span className="flex items-center gap-1 text-warning">
               <TriangleAlert className="size-3" /> {t(`ซ้ำ ${stats.duplicates} แถว`, `${stats.duplicates} duplicates`)}
             </span>
           )}
