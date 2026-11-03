@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   CircleSlash,
   Clock3,
+  FileSpreadsheet,
   Inbox,
   Loader2,
   Trash2,
@@ -111,7 +112,7 @@ function QuickActions() {
             to="/data"
             className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium transition-colors hover:border-signal/40 hover:text-signal"
           >
-            <SheetIcon className="size-3.5" />
+            <FileSpreadsheet className="size-3.5" />
             {t("เปิด Data Studio · Excel/CSV", "Open Data Studio · Excel/CSV")}
           </Link>
         }
